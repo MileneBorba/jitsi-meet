@@ -15,6 +15,7 @@ import {
     participantUpdated
 } from '../participants';
 import { getLocalTracks, trackAdded, trackRemoved } from '../tracks';
+import { getJitsiMeetGlobalNS } from '../util';
 
 import {
     CONFERENCE_FAILED,
@@ -303,7 +304,8 @@ export function createConference() {
                 // XXX Lib-jitsi-meet does not accept uppercase letters.
                 room.toLowerCase(), {
                     ...state['features/base/config'],
-                    applicationName: getName()
+                    applicationName: getName(),
+                    getWiFiStatsMethod: getJitsiMeetGlobalNS().getWiFiStats
                 });
 
         conference[JITSI_CONFERENCE_URL_KEY] = locationURL;
